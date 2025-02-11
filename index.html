@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Dodeca Park" property="og:title" />
+    <meta content="Where did all of these dragons come from?" property="og:description" />
+    <meta content="https://demonin.com/games/dodecaPark/" property="og:url" />
+    <meta content="img/icon.png" property="og:image" />
+    <meta content="#3daa65" data-react-helmet="true" name="theme-color" />
+    <title>Dodeca Park</title>
+    <link rel="stylesheet" href="98.css">
+    <link rel="stylesheet" href="style.css?v022=1">
+    <link rel="icon" type="image/x-icon" href="img/icon.png">
+</head>
+<body>
+    <script src="chs.js"></script>
+    <script src="core.js"></script>
+    <div id="topbar">
+        <p id="score">0</p>
+        <p id="topBarInfo"><span id="scorePerSecond">Score/second: 0</span><br><span id="dragonAmount">Dragons: 0/50</span><br><span id="nextUnlock">Breeding will unlock at 100,000 score!</span></Breeding></p>
+        <p id="resources"><img src="img/gunk.png" style="width: 32px; vertical-align: middle"> Gunk: <span id="gunk">0</span></p>
+    </div>
+    <div id="game">
+        <div class="dragon" style="background-image: url('img/dragon1.gif')" onclick="displayInfo(1,0)"></div>
+        <div class="dragon" style="background-image: url('img/dragon2.gif')" onclick="displayInfo(1,1)"></div>
+        <div class="dragon" style="background-image: url('img/dragon3.gif')" onclick="displayInfo(1,2)"></div>
+    </div>
+    <div id="selection"></div>
+    <div id="basicEgg" onmouseover="displayInfo(2,1)" onmouseout="displayInfo(2,0)" onclick="openBasicEgg(); displayInfo(2,1)"></div>
+    <div id="glowingEgg" onmouseover="displayInfo(3,1)" onmouseout="displayInfo(3,0)" onclick="openGlowingEgg(); displayInfo(3,1)"></div>
+    <div id="powerEgg" onmouseover="displayInfo(6,1)" onmouseout="displayInfo(6,0)" onclick="openPowerEgg(); displayInfo(6,1)"></div>
+    <div id="gemstoneEgg" onmouseover="displayInfo(7,1)" onmouseout="displayInfo(7,0)" onclick="openGemstoneEgg(); displayInfo(7,1)"></div>
+    <div id="decorationCrate" onmouseover="displayInfo(4,1)" onmouseout="displayInfo(4,0)" onclick="openDecorationCrate(); displayInfo(4,1)"></div>
+    <button class="topButton" style="right: 268px" onclick="openEventLog()">Event log</button>
+    <button class="topButton" style="right: 182px" onclick="openTips()">Tips</button>
+    <button class="topButton" style="right: 96px" onclick="openBestiary()">&#8202;&#8202;Bestiary</button>
+    <button class="topButton" style="right: 10px" onclick="openSettings()">Settings</button>
+    <button id="breedingButton" onclick="openBreeding()"><img src="img/heart.png" style="width: 28px; vertical-align: middle"> Breeding</button>
+    <button id="dailyRollButton" onclick="openDailyRoll()"><img src="img/dice.png" style="width: 32px; vertical-align: middle"> Daily roll</button>
+    <button id="decorationsButton" onclick="openDecorations()"><img src="img/decoration.png" style="width: 32px; vertical-align: middle"> Decorations</button>
+    <!--Event log tab-->
+    <div class="window box" id="eventLogTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Event log</div>
+        </div>
+        <div class="window-body" style="padding: 8px; background-color: #444">
+            <p id="eventLog" style="color: white"></p>
+        </div>
+    </div>
+    <!--Tip tab-->
+    <div class="window box" id="tipTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Tips</div>
+        </div>
+        <div class="window-body" style="padding: 8px">
+            <p id="tip" style="font-size: 16px; margin-bottom: 8px;">Tip 0: This is a tip test!</p>
+            <img src="img/leftArrow.png" style="cursor: pointer; user-select: none" onclick="previousTip()">
+            <img src="img/rightArrow.png" style="cursor: pointer; user-select: none" onclick="nextTip()">
+        </div>
+    </div>
+    <!--Settings tab-->
+    <div class="window box" id="settingsTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Settings</div>
+        </div>
+        <div class="window-body" style="padding: 8px">
+            <input type="checkbox" class="settingsButton" onclick="toggleSpawnWildDragons()" id="wildSpawnCheckbox" checked> <label for="wildSpawnCheckbox">Spawn wild dragons</label><br><br>
+            <button class="settingsButton" onclick="exportGame()">Export</button>
+            <button class="settingsButton" onclick="importGame()">&#8202;&#8202;Import</button><br>
+            <button class="settingsButton" onclick="save()">&#8202;&#8202;Save</button>
+            <button class="settingsButton" onclick="hardReset()">Hard reset</button>
+            <p><b>Dodeca Park v0.2.2</b><br>Created by Demonin<br>Original dragon sprite by Zaxolotl<br>Additional work by acod<br><a href="changelog.txt" target="_blank">Changelog</a></p>
+        </div>
+    </div>
+    <!--Info tab-->
+    <div class="window box" id="infoTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Info</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" class="closeButton" onclick="displayInfo(1,currentInfo)"></button>
+        </div>
+        </div>
+        <div class="window-body" id="infoBody" style="padding: 8px">
+            <p id="info">Test text!</p>
+            <p id="subInfo">test text 2</p>
+            <img id="infoImage" src="img/dragon1.gif" style="background-color: #999">
+            <p id="eggRarities" style="display: block; font-size: 16px; margin-top: 8px"></p>
+            <button id="sendAwayButton" onclick='sendAwayCheck(currentInfo)'>Send away</button>
+            <button id="removeDecorationButton" onclick='removeDecoration(currentCrateInfo)'>Remove decoration</button>
+        </div>
+    </div>
+    <!--Bestiary tab-->
+    <div class="window box" id="bestiaryTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Bestiary</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" class="closeButton" onclick="closeBestiary()"></button>
+        </div>
+        </div>
+        <div class="window-body" style="padding: 8px">
+            <div id="bestiary" style="width: 560px; max-width: calc(80vw - 332px); height: 473px; overflow-y: scroll"></div>
+            <div id="bestiaryInfoBox">
+                <p id="bestiaryTitle"></p>
+                <p id="bestiaryInfo"></p>
+                <button id="dragonListButton" onclick='openDragonList()'>Manage dragons</button>
+            </div>
+        </div>
+    </div>
+    <!--Daily roll tab-->
+    <div class="window box" id="dailyRollTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Daily roll</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" class="closeButton" onclick="closeDailyRoll()"></button>
+        </div>
+        </div>
+        <div class="window-body" style="padding: 8px">
+                <div class="dailyRollIcon" style="left: 50px; background-color: #8c8"></div>
+                <div class="dailyRollIcon" style="left: 154px; background-color: #8cc"></div>
+            <div class="dailyRollIcon" style="left: 258px; background-color: #c88"></div>
+            <div class="dailyRollIcon" style="left: 362px; background-color: #a8c; background-image: url('img/skipIncubation.png')"></div>
+            <img src="img/dailyRollBar.png" id="dailyRollBar">
+            <p id="dailyRollsLeft"><b>You have 0 rolls left</b></p>
+            <button id="rollButton" onclick="dailyRoll()">Roll!</button>
+            <p id="dailyRollResults" style="text-align: center; font-size: 16px; font-weight: bold; margin-top: 8px"></p>
+        </div>
+    </div>
+    <!--Decorations tab-->
+    <div class="window box" id="decorationsTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Decorations</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" class="closeButton" onclick="closeDecorations()"></button>
+        </div>
+        </div>
+        <div class="window-body" id="decorations" style="padding: 8px">
+        </div>
+        <button onclick="removeAllDecorations()" style="position: absolute; bottom: 8px; right: 8px">Remove all decorations</button>
+    </div>
+    <!--Breeding tab-->
+    <div class="window box" id="breedingTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Breeding</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" class="closeButton" onclick="closeBreeding()"></button>
+        </div>
+        </div>
+        <div class="window-body" style="padding: 8px">
+            <p class="breedingTitle" style="left: 25px">Dragon 1</p>
+            <p class="breedingTitle" style="right: 25px">Dragon 2</p>
+            <div class="selectBreedingDragon" style="left: 50px" onclick="openBreedingSelection(1)"></div>
+            <div class="selectBreedingDragon" style="right: 50px"  onclick="openBreedingSelection(2)"></div>
+            <p class="breedingTitle" style="top: 240px; left: 25px">No dragon selected...</p>
+            <p class="breedingTitle" style="top: 240px; right: 25px">No dragon selected...</p>
+            <p id="breedingProbabilities"></p>
+            <button id="breedButton" style="background-color: #9dd; margin: auto; display: block" onclick="breed()">&#8202;&#8202;Breed!</button>
+            <div id="incubationTab" style="margin: auto; width: 400px; text-align: center; display: none">
+                <img id="incubationImage" src="img/dragon1-1.png" style="width: 96px; background-color: #aaa">
+                <p id="incubationTitle" style="font-size: 16px; font-weight: bold"></p>
+                <p id="incubationTime" style="font-size: 16px"></p>
+            </div><br>
+            <button style="margin: auto; display: block" onclick="resetBreedingSelections()">Reset selections</button><br>
+            <p id="incubationSkipText"><img src="img/skipIncubation.png" style="width: 32px; vertical-align: middle"> x<span id="incubationSkips">0</span></p>
+            <button id="incubationSkipButton" style="background-color: #b9d" onclick="skipIncubation()">Skip incubation</button>
+        </div>
+    </div>
+    <!--Breeding selection tab-->
+    <div class="window box" id="breedingSelectionTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Select a dragon to breed!</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" class="closeButton" onclick="closeBreedingSelection()"></button>
+        </div>
+        </div>
+        <div class="window-body" id="breedingSelectionList" style="height: 680px; overflow-y: scroll; overflow-x: hidden">
+        </div>
+    </div>
+    <!--Dragon list tab-->
+    <div class="window box" id="dragonListTab">
+        <div class="title-bar">
+        <div class="title-bar-text">Manage your dragons!</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" class="closeButton" onclick="closeDragonList()"></button>
+        </div>
+        </div>
+        <div class="window-body" id="dragonList" style="height: 680px; overflow-y: scroll; overflow-x: hidden">
+        </div>
+    </div>
+    <script src="constants.js?v022=1"></script>
+    <script src="script.js?v022=1"></script>
+    <script defer>setAutoSave()</script>
+<!--客服 开始-->
+<script src="//g8hh.github.io/static/js/jquery.min.js"></script>
+<link rel="stylesheet" href="//g8hh.github.io/static/css/kf.css" type="text/css" media="screen" charset="utf-8">
+<script src="//g8hh.github.io/static/js/kf.js"></script>
+<!-- 客服 结束 -->
+<!--站长统计-->
+    <div style="display: none">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6581389daf4dd6fe7dbb4d20fdcb52a6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    </div>
+</body>
+</html>

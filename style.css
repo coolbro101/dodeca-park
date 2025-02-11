@@ -1,0 +1,530 @@
+@font-face{
+    font-family:"Pixelated MS Sans Serif";
+    font-style:normal;
+    font-weight:400;
+    src:url(fonts/ms_sans_serif.woff) format("woff");
+    src:url(fonts/ms_sans_serif.woff2) format("woff2")
+}
+@font-face{
+    font-family:"Pixelated MS Sans Serif";
+    font-style:normal;
+    font-weight:700;
+    src:url(fonts/ms_sans_serif_bold.woff) format("woff");
+    src:url(fonts/ms_sans_serif_bold.woff2) format("woff2")
+}
+@font-face{
+    font-family:"Alagard";
+    font-style:normal;
+    font-weight:700;
+    src:url(fonts/alagard.woff) format("woff");
+}
+@font-face{
+    font-family:"VCR OSD MONO";
+    font-style:normal;
+    font-weight:700;
+    src:url(fonts/VCR_OSD_MONO.woff) format("woff");
+}
+
+body {
+    background-color: #888;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    image-rendering: pixelated;
+    background-image: url('img/tile.png');
+    background-size: 128px 64px;
+    overflow: hidden;
+}
+
+button {
+    cursor: pointer;
+}
+
+#topbar {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 10000;
+}
+
+#basicEgg {
+    position: absolute;
+    top: 112px;
+    left: 12px;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/egg1.png');
+    background-size: 64px 64px;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+#glowingEgg {
+    position: absolute;
+    top: 188px;
+    left: 12px;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/egg2.png');
+    background-size: 64px 64px;
+    cursor: pointer;
+    z-index: 10000;
+    display: none;
+}
+
+#powerEgg {
+    position: absolute;
+    top: 264px;
+    left: 12px;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/egg3.png');
+    background-size: 64px 64px;
+    cursor: pointer;
+    z-index: 10000;
+    display: none;
+}
+
+#gemstoneEgg {
+    position: absolute;
+    top: 340px;
+    left: 12px;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/egg4.png');
+    background-size: 64px 64px;
+    cursor: pointer;
+    z-index: 10000;
+    display: none;
+}
+
+#decorationCrate {
+    position: absolute;
+    top: 112px;
+    left: 88px;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/crate.png');
+    background-size: 64px 64px;
+    cursor: pointer;
+    z-index: 10000;
+    display: none;
+}
+
+p {
+    font-family: "Pixelated MS Sans Serif";
+    margin: 0;
+}
+
+#score {
+    color: white;
+    font-size: 72px;
+    margin: 0;
+    margin-top: 14px;
+    text-align: center;
+}
+
+.bonusScore {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/bonusScore.png');
+    background-size: 64px 64px;
+    z-index: 9998;
+    cursor: pointer;
+}
+
+.superBonusScore {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/bonusScore2.png');
+    background-size: 64px 64px;
+    z-index: 9998;
+    cursor: pointer;
+}
+
+.bonusScoreText {
+    position: absolute;
+    top: 0;
+    width: 192px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #bfb;
+    text-align: center;
+    z-index: 9998;
+}
+
+#topBarInfo {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    color: white;
+    font-size: 24px;
+}
+
+#resources {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #bfb;
+    text-align: right;
+    font-size: 24px;
+    display: none;
+}
+
+#game {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dragon {
+    position: absolute;
+    width: 192px;
+    height: 192px;
+    background-image: url('img/dragon1.gif');
+    background-size: 192px 192px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#selection {
+    position: absolute;
+    width: 192px;
+    height: 192px;
+    background-image: url('img/selection.png');
+    background-size: 192px 192px;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.topButton {
+    position: absolute;
+    top: 110px;
+    z-index: 10000;
+}
+
+#eventLogTab {
+    position: absolute;
+    top: 140px;
+    right: 10px;
+    z-index: 10000;
+    width: 400px;
+    max-width: 90vw;
+    display: none;
+}
+
+#tipTab {
+    position: absolute;
+    top: 140px;
+    right: 10px;
+    z-index: 10000;
+    width: 300px;
+    max-width: 90vw;
+    display: block;
+}
+
+#bestiaryTab {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    max-width: 85vw;
+    height: 500px;
+    z-index: 10000;
+    display: none;
+}
+
+#bestiaryInfoBox {
+    position: absolute;
+    top: 23px;
+    right: 3px;
+    width: 332px;
+    height: 470px;
+    background-color: #aaa;
+    padding-top: 10px;
+}
+
+.bestiaryImage {
+    width: 96px;
+    height: 96px;
+    background-size: 96px 96px;
+    background-color: #aaa;
+    border: 4px outset #888;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+#bestiaryTitle {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+#bestiaryInfo {
+    font-size: 16px;
+    text-align: center;
+}
+
+#settingsTab {
+    position: absolute;
+    top: 140px;
+    right: 10px;
+    z-index: 10000;
+    width: 300px;
+    max-width: 90vw;
+    display: none;
+}
+
+.settingsButton {
+    margin-bottom: 8px;
+}
+
+#infoTab {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+    z-index: 10001;
+    min-width: 340px;
+    max-width: 90vw;
+}
+
+#info {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.closeButton {
+    background-image: url('img/close.svg');
+    background-repeat: no-repeat;
+    background-position: 3px 3px;
+    cursor: pointer;
+}
+
+#subInfo {
+    float: right;
+    text-align: right;
+    margin-top: 8px;
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+#sendAwayButton, #removeDecorationButton, #sendAwayListButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#sendAwayListButton {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+#dragonListButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#dailyRollButton {
+    position: absolute;
+    bottom: 56px;
+    left: 10px;
+    font-size: 24px;
+    height: 36px;
+    z-index: 10000;
+    display: none;
+}
+
+#dailyRollTab {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 516px;
+    max-width: 85vw;
+    z-index: 10000;
+    display: none;
+}
+
+.dailyRollIcon {
+    position: absolute;
+    top: 60px;
+    width: 96px;
+    height: 96px;
+    background-size: 96px 96px;
+    background-color: #aaa;
+    border: 4px outset #888;
+}
+
+#dailyRollScore {
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+#dailyRollBar {
+    width: 20px;
+    position: absolute;
+    top: 60px;
+    left: 44px;
+}
+
+#dailyRollsLeft {
+    margin-top: 150px;
+    font-size: 24px;
+    text-align: center;
+}
+
+#rollButton {
+    display: block;
+    margin: auto;
+    margin-top: 16px;
+}
+
+#decorationsButton {
+    position: absolute;
+    bottom: 102px;
+    left: 10px;
+    font-size: 24px;
+    height: 36px;
+    z-index: 10000;
+    display: none;
+}
+
+#decorationsTab {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-width: 85vw;
+    height: 500px;
+    z-index: 10000;
+    color: white;
+    font-size: 24px;
+    display: none;
+}
+
+.decorationImage {
+    width: 96px;
+    height: 96px;
+    background-size: 96px 96px;
+    background-color: #aaa;
+    border: 4px outset #888;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.placedDecoration {
+    position: absolute;
+    transform: scale(4);
+    cursor: pointer;
+}
+
+#breedingButton {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 24px;
+    height: 36px;
+    z-index: 10000;
+    display: none;
+}
+
+#breedingTab {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-width: 80vw;
+    z-index: 10000;
+    display: none;
+}
+
+.selectBreedingDragon {
+    position: absolute;
+    top: 80px;
+    width: 144px;
+    height: 144px;
+    background-color: #aaa;
+    border: 4px outset #888;
+    cursor: pointer;
+    background-size: 144px 144px;
+}
+
+.breedingTitle {
+    position: absolute;
+    top: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    width: 194px;
+}
+
+#breedingSelectionTab, #dragonListTab {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    max-width: 80vw;
+    height: 700px;
+    max-height: 100vh;
+    z-index: 10000;
+    display: none;
+}
+
+.breedingSelection, .listedDragon {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    height: 96px;
+    border: 4px outset #888;
+    cursor: pointer;
+}
+
+.breedingSelectionImage, .listedDragonImage {
+    position: relative;
+    width: 96px;
+    vertical-align: top;
+}
+
+.breedingSelectionText, .listedDragonText {
+    position: relative;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+#breedingProbabilities {
+    margin-top: 280px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#incubationSkipText {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    font-size: 16px;
+}
