@@ -49,7 +49,7 @@ reset()
 
 //If the user confirms the hard reset, resets all variables, saves and refreshes the page
 function hardReset() {
-  if (confirm("Are you sure you want to reset? You will lose everything!")) {
+  if (confirm("你确定要重置吗？你会失去一切的！")) {
     reset()
     save()
     location.reload()
@@ -854,11 +854,11 @@ function deleteDragon(x) {
 }
 
 function sendAwayCheck(x) {
-    if (confirm("Are you sure you want to send away this dragon? It will be gone forever!")) {updateEventLog("You sent away your " + dragonNames[game.dragons[x][0]] + ""); deleteDragon(x)}
+    if (confirm("你确定要把这条龙放生吗？它将永远消失！")) {updateEventLog("你放生了你的 " + cnItems(dragonNames[game.dragons[x][0]]) + ""); deleteDragon(x)}
 }
 
 function sendAwayListCheck(x) {
-    if (confirm("Are you sure you want to send away this dragon? It will be gone forever!")) {updateEventLog("You sent away your " + dragonNames[game.dragons[x][0]] + ""); deleteDragon(x); document.getElementById("dragonListTab").style.display = "none"; openDragonList();}
+    if (confirm("你确定要把这条龙放生吗？它将永远消失！")) {updateEventLog("你放生了你的 " + cnItem(dragonNames[game.dragons[x][0]]) + ""); deleteDragon(x); document.getElementById("dragonListTab").style.display = "none"; openDragonList();}
 }
 
 function displayTip(x) {
