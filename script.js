@@ -854,7 +854,7 @@ function deleteDragon(x) {
 }
 
 function sendAwayCheck(x) {
-    if (confirm("你确定要把这条龙放生吗？它将永远消失！")) {updateEventLog("你放生了你的 " + cnItems(dragonNames[game.dragons[x][0]]) + ""); deleteDragon(x)}
+    if (confirm("你确定要把这条龙放生吗？它将永远消失！")) {updateEventLog("你放生了你的 " + cnItem(dragonNames[game.dragons[x][0]]) + ""); deleteDragon(x)}
 }
 
 function sendAwayListCheck(x) {
